@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+venv/
+.env
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Android
+*.iml
+.gradle/
+local.properties
+build/
+captures/
+.externalNativeBuild/
+
+# iOS
+*.xcuserdata
+DerivedData/
+Pods/
+*.xcworkspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# MySQL
+*.sql.bak
