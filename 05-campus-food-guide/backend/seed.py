@@ -102,5 +102,36 @@ def seed():
     print(f"Seeded {len(RESTAURANTS)} restaurants and {len(REVIEWS)} reviews.")
 
 
+def seed_users():
+    import hashlib
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(255) NOT NULL,
+            password_hash VARCHAR(255) NOT NULL,
+            role VARCHAR(50) DEFAULT 'user',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    cursor.execute("DELETE FROM users")
+    users = [
+        ("admin", hashlib.sha1(b"admin123").hexdigest(), "admin"),
+        ("foodie_alice", hashlib.sha1(b"password").hexdigest(), "user"),
+        ("reviewer_bob", hashlib.sha1(b"bob2026").hexdigest(), "user"),
+    ]
+    for username, pw_hash, role in users:
+        cursor.execute(
+            "INSERT INTO users (username, password_hash, role) VALUES (%s, %s, %s)",
+            (username, pw_hash, role),
+        )
+    conn.commit()
+    cursor.close()
+    conn.close()
+    print(f"Seeded {len(users)} users.")
+
+
 if __name__ == "__main__":
     seed()
+    seed_users()

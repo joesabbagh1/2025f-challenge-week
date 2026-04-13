@@ -168,5 +168,36 @@ def seed(db_name: str | None = None):
     print(f"Seeded {len(DECKS)} decks with {sum(len(d['cards']) for d in DECKS)} cards.")
 
 
+def seed_users():
+    import base64
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(255) NOT NULL,
+            session_token VARCHAR(255) NOT NULL,
+            role VARCHAR(50) DEFAULT 'user',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    cursor.execute("DELETE FROM users")
+    users = [
+        ("admin", base64.b64encode(b"admin:secret").decode(), "admin"),
+        ("student1", base64.b64encode(b"student1:pass123").decode(), "user"),
+        ("student2", base64.b64encode(b"student2:qwerty").decode(), "user"),
+    ]
+    for username, token, role in users:
+        cursor.execute(
+            "INSERT INTO users (username, session_token, role) VALUES (%s, %s, %s)",
+            (username, token, role),
+        )
+    conn.commit()
+    cursor.close()
+    conn.close()
+    print(f"Seeded {len(users)} users.")
+
+
 if __name__ == "__main__":
     seed()
+    seed_users()

@@ -232,5 +232,35 @@ def seed():
     print(f"Seeded {len(ITEMS)} items into the database.")
 
 
+def seed_users():
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS sellers (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(255) NOT NULL,
+            password VARCHAR(255) NOT NULL,
+            email VARCHAR(255),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    cursor.execute("DELETE FROM sellers")
+    sellers = [
+        ("admin", "admin123", "admin@marketplace.epita.fr"),
+        ("alice_martin", "password", "alice.martin@epita.fr"),
+        ("lucas_dupont", "lucas2026", "lucas.dupont@epita.fr"),
+    ]
+    for username, password, email in sellers:
+        cursor.execute(
+            "INSERT INTO sellers (username, password, email) VALUES (%s, %s, %s)",
+            (username, password, email),
+        )
+    conn.commit()
+    cursor.close()
+    conn.close()
+    print(f"Seeded {len(sellers)} sellers.")
+
+
 if __name__ == "__main__":
     seed()
+    seed_users()

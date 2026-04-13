@@ -164,5 +164,36 @@ def seed():
     conn.close()
 
 
+def seed_users():
+    import hashlib
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(255) NOT NULL,
+            password_hash VARCHAR(255) NOT NULL,
+            role VARCHAR(50) DEFAULT 'user',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    cursor.execute("DELETE FROM users")
+    users = [
+        ("admin", hashlib.md5(b"admin123").hexdigest(), "admin"),
+        ("alice", hashlib.md5(b"password").hexdigest(), "user"),
+        ("bob", hashlib.md5(b"bob2026").hexdigest(), "user"),
+    ]
+    for username, pw_hash, role in users:
+        cursor.execute(
+            "INSERT INTO users (username, password_hash, role) VALUES (%s, %s, %s)",
+            (username, pw_hash, role),
+        )
+    conn.commit()
+    cursor.close()
+    conn.close()
+    print(f"Seeded {len(users)} users.")
+
+
 if __name__ == "__main__":
     seed()
+    seed_users()
