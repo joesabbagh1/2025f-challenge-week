@@ -129,3 +129,25 @@ def add_review(restaurant_id):
 if __name__ == "__main__":
     init_db()
     app.run(debug=True, port=5000)
+
+
+
+
+
+
+
+
+
+# to-dossssss
+
+@app.route("/reviews/<int:review_id>", methods=["DELETE"])
+def delete_review(review_id):
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM reviews WHERE id = %s", (review_id,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return jsonify({"message": "Review deleted"}), 200
+
+
