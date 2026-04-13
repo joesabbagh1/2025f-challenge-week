@@ -286,3 +286,122 @@ Each TODO includes **acceptance criteria** so you know when it is done.
 ├── .gitignore
 └── README.md
 ```
+
+
+---
+
+## SE TODOs (40)
+
+
+### Core (01-15)
+
+| Code | TODO |
+|------|------|
+| SMKT-S001 | [API] GET /items/:id returns all fields |
+| SMKT-S002 | [Mobile] Detail screen: call API, populate fields |
+| SMKT-S003 | [Mobile] Format price + relative date |
+| SMKT-S004 | [Mobile] SOLD overlay if is_sold=true |
+| SMKT-S005 | [Mobile] Loading spinner, 404 handling |
+| SMKT-S006 | [API] POST /items validation (title, price, category) |
+| SMKT-S007 | [API] Return 400 with field errors |
+| SMKT-S008 | [Mobile] Creation form: title, desc, price, category |
+| SMKT-S009 | [Mobile] Category dropdown (Books, Electronics, etc.) |
+| SMKT-S010 | [Mobile] Client validation with inline errors |
+| SMKT-S011 | [Mobile] On 201, navigate back, item at top |
+| SMKT-S012 | [API] GET /categories (DISTINCT) |
+| SMKT-S013 | [API] Filter GET /items by category param |
+| SMKT-S014 | [Mobile] Horizontal chip row from GET /categories |
+| SMKT-S015 | [Mobile] Chip filtering, highlight active, empty state |
+
+### Intermediate (16-25)
+
+| Code | TODO |
+|------|------|
+| SMKT-S016 | [API] Sort param: price_asc/desc, date_asc/desc |
+| SMKT-S017 | [API] Combine sort + category filter |
+| SMKT-S018 | [Mobile] Sort button + bottom sheet |
+| SMKT-S019 | [Mobile] Persist sort preference |
+| SMKT-S020 | [API] PATCH /items/:id {is_sold} |
+| SMKT-S021 | [Mobile] 'Mark as Sold' button on detail |
+| SMKT-S022 | [Mobile] Confirmation dialog + SOLD overlay |
+| SMKT-S023 | [Mobile] List refreshes on back |
+| SMKT-S024 | [Mobile] Un-mark: 'Mark as Available' |
+| SMKT-S025 | [API] Search param (LIKE title+desc) |
+
+### Advanced (26-35)
+
+| Code | TODO |
+|------|------|
+| SMKT-S026 | [Mobile] Search bar with debounce + clear |
+| SMKT-S027 | [API] Pagination: page + limit + total_count |
+| SMKT-S028 | [Mobile] Infinite scroll |
+| SMKT-S029 | [Mobile] Pull-to-refresh |
+| SMKT-S030 | [Mobile] List cards: image, title, price, badge, status |
+| SMKT-S031 | [Mobile] 'Contact Seller' email button |
+| SMKT-S032 | [Mobile] Share button on detail |
+| SMKT-S033 | [API] GET /items/:id/similar (same category, limit 5) |
+| SMKT-S034 | [Mobile] Similar Items section on detail |
+| SMKT-S035 | [Mobile] Similar item tap navigates to detail |
+
+### Polish (36-40)
+
+| Code | TODO |
+|------|------|
+| SMKT-S036 | [Mobile] Image loading + placeholders |
+| SMKT-S037 | [Mobile] Empty list: 'No items yet' CTA |
+| SMKT-S038 | [Mobile] Item count badge on category chips |
+| SMKT-S039 | [Mobile] 'My Listings' section |
+| SMKT-S040 | [Mobile] Final polish: card design, margins, responsive |
+
+## CS TODOs (30)
+
+
+### Threat Modeling (C001-C006)
+
+| Code | TODO |
+|------|------|
+| SMKT-C001 | Architecture diagram + data flows + trust boundaries |
+| SMKT-C002 | Endpoint inventory (method, inputs, auth, sensitivity) |
+| SMKT-C003 | STRIDE analysis on main flow |
+| SMKT-C004 | Attack surface mapping (all untrusted inputs) |
+| SMKT-C005 | Attack tree (3+ paths, AND/OR nodes) |
+| SMKT-C006 | 1-page threat assessment (top 5 risks) |
+
+### Code Review / Bug Bounty (C007-C016)
+
+| Code | TODO |
+|------|------|
+| SMKT-C007 | Find SQL Injection (CWE-89) |
+| SMKT-C008 | Find Stored XSS (CWE-79) |
+| SMKT-C009 | Find IDOR (CWE-639) |
+| SMKT-C010 | Find hardcoded secrets (CWE-798) |
+| SMKT-C011 | Find weak password hashing (CWE-328) |
+| SMKT-C012 | Audit missing authentication (CWE-306) |
+| SMKT-C013 | Analyze CORS configuration |
+| SMKT-C014 | Find debug mode exposure (CWE-489) |
+| SMKT-C015 | Review error handling (CWE-209) |
+| SMKT-C016 | Audit SE teammates' code (2+ bug reports) |
+
+### Security Testing (C017-C024)
+
+| Code | TODO |
+|------|------|
+| SMKT-C017 | SQLi exploit script |
+| SMKT-C018 | XSS exploit (3 payloads) |
+| SMKT-C019 | IDOR enumeration script |
+| SMKT-C020 | Rate limit / DoS test |
+| SMKT-C021 | Automated scan (nmap + Python) |
+| SMKT-C022 | API fuzzer |
+| SMKT-C023 | Project-specific exploit (Werkzeug/pickle/CSRF/etc.) |
+| SMKT-C024 | test_security.py (8+ pytest cases) |
+
+### Deployment & Hardening (C025-C030)
+
+| Code | TODO |
+|------|------|
+| SMKT-C025 | Fix SQL Injection (parameterized queries) |
+| SMKT-C026 | Add authentication + fix IDOR |
+| SMKT-C027 | Secure configuration (debug, secrets, passwords) |
+| SMKT-C028 | Security headers + rate limiting |
+| SMKT-C029 | Structured logging + alerting |
+| SMKT-C030 | Final 5-page audit report |
